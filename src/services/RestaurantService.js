@@ -25,11 +25,6 @@ class RestaurantService {
 
     }
 
-    // 查看Rabbit House 历史点单，从服务器下载
-    findOrdersOfRestaurant() {
-
-    }
-
     // 我Rabbit House 就算是倒闭，也不会...
     deleteRestaurant() {
 

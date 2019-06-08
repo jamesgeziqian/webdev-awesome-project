@@ -39,6 +39,11 @@ class OrderService {
         this.order.set(foodId, food);
     }
 
+    // 查看Rabbit House 历史点单，从服务器下载
+    findOrdersOfRestaurant(restaurantId) {
+
+    }
+
     // 下单
     sendOrder() {
 
