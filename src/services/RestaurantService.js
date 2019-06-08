@@ -17,7 +17,7 @@ class RestaurantService {
 
     // 逛街
     findAllRestaurants() {
-
+        return null;
     }
 
     // 服务器检查Rabbit House 是否存在，若存在，返回Rabbit House 的菜单 which is an ArrayOfFoods
