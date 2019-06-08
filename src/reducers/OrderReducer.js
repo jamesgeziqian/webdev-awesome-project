@@ -1,7 +1,7 @@
 import {
     ADD_FOOD_ORDER,
     DELETE_FOOD_ORDER,
-    FIND_ORDERS,
+    FIND_HISTORY_ORDERS,
     UPDATE_FOOD_ORDER,
     VIEW_FOOD_ORDER,
     VIEW_ORDER
@@ -12,7 +12,7 @@ const OrderReducer = (state = {}, action) => {
         case ADD_FOOD_ORDER:
         case VIEW_ORDER:
         case VIEW_FOOD_ORDER:
-        case FIND_ORDERS:
+        case FIND_HISTORY_ORDERS:
         case DELETE_FOOD_ORDER:
         case UPDATE_FOOD_ORDER:
         default:

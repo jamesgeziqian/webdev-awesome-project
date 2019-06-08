@@ -41,7 +41,7 @@ class OrderService {
     }
 
     // 查看Rabbit House 历史点单，从服务器下载
-    findOrdersOfRestaurant(restaurantId) {
+    findOrdersOfRestaurant() {
 
     }
 
