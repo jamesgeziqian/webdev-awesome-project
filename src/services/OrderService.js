@@ -37,6 +37,7 @@ class OrderService {
     // 修改Rabbit House 的点单
     updateFood(foodId, food) {
         this.order.set(foodId, food);
+        return this.order.get(foodId);
     }
 
     // 查看Rabbit House 历史点单，从服务器下载
