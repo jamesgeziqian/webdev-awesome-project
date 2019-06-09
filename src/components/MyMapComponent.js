@@ -52,6 +52,6 @@ export default class MyFancyComponent extends React.PureComponent {
 
 
 
- // MyMapComponent
-    // <MyMapComponent isMarkerShown />// Map with a Marker
+// MyMapComponent
+// <MyMapComponent isMarkerShown />// Map with a Marker
 // <MyMapComponent isMarkerShown={false} />// Just only Map
