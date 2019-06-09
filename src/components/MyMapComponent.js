@@ -1,7 +1,7 @@
 import React from "react"
 import { compose, withProps } from "recompose"
 import { withScriptjs, GoogleApiWrapper, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-
+// from https://tomchentw.github.io/react-google-maps/#usage--configuration
 const MyMapComponent = compose(
     withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyC3UZUj68D0h84Dbm6uURBNo07en16EReI&v=3.exp&libraries=geometry,drawing,places",
