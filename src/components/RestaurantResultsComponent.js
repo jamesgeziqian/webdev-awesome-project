@@ -7,6 +7,7 @@ const RestaurantResultsComponent = ({searchTerm, location, results, handlers}) =
         handlers.searchTermLocal(searchTerm);
         return null;
     }
+    console.log(results);
     return (
         <div>
             <h3>Search Results</h3>
@@ -28,9 +29,12 @@ const RestaurantResultsComponent = ({searchTerm, location, results, handlers}) =
                 </Link>
                 <ul>
                     {
-                        results.length > 0 ?
-                        results["businesses"].map(business => <li>{business.id}</li>)
-                            : null
+                        results["businesses"].map(
+                            (business) =>
+                                <li key={business.id}>
+                                    {business.name}
+                                </li>
+                        )
                     }
                 </ul>
             </div>
