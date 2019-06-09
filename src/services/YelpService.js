@@ -11,8 +11,9 @@ class YelpService {
 
     constructor() {
         // set url
-        this.url = "https://api.yelp.com/v3";
-        this.businessUrl = this.url + "/business";
+        // this.url = "http://localhost:8080/https://api.yelp.com/v3";
+        this.url = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3";
+        this.businessUrl = this.url + "/businesses";
         this.autocompleteUrl = this.url + "/autocomplete";
 
         // set default value: Ell Hall
@@ -48,7 +49,7 @@ class YelpService {
                 url = `${url}&term=${searchTerm}`;
             }
 
-            return fetch(url, this.headers)
+            return fetch(url, {headers: this.headers})
                 .then((response) => response.json());
         }
         return null;
@@ -60,13 +61,13 @@ class YelpService {
         if (typeof searchTerm !== "undefined" && searchTerm.length > 0) {
             url = `${url}&term=${searchTerm}`;
         }
-        return fetch(url, this.headers).then((response) => response.json());
+        return fetch(url, {headers: this.headers}).then((response) => response.json());
     }
 
     searchBusinessDetails(id) {
         if (typeof id !== "undefined" && id.length > 0) {
             const url = `${this.businessUrl}/${id}`;
-            return fetch(url, this.headers).then((response) => response.json());
+            return fetch(url, {headers: this.headers}).then((response) => response.json());
         }
     }
 

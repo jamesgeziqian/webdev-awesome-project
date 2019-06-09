@@ -22,7 +22,7 @@ const RestaurantSearchComponent = ({searchTerm, location, handlers}) =>
                 search
             </Link>
         </div>
-        <MyFancyComponent isMarkerShown={true}/>
+        {/*<MyFancyComponent isMarkerShown={true}/>*/}
     </div>;
 
 export default RestaurantSearchComponent
