@@ -19,7 +19,7 @@ export const searchLocationLocal = (location) => {
     };
 };
 
-export const searchNearByYelp = (results) => {
+export const searchNearBy = (results) => {
     return {
         type: SEARCH_NEARBY,
         results: results

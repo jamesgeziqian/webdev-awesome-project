@@ -5,7 +5,7 @@ import {
     SEARCH_TERM_LOCAL
 } from "../constants/SearchConstants";
 
-const SearchReducer = (state = {searchTerm: "", location: ""}, action) => {
+const SearchReducer = (state = {searchTerm: "", location: "", results: []}, action) => {
     switch (action.type) {
         case SEARCH_TERM_LOCAL:
             return {

@@ -1,5 +1,14 @@
 class YelpService {
 
+    static instance;
+
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new YelpService();
+        }
+        return this.instance;
+    }
+
     constructor() {
         // set url
         this.url = "https://api.yelp.com/v3";
