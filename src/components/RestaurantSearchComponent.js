@@ -2,7 +2,7 @@ import React from 'react'
 import {BrowserRouter as Router, Link} from "react-router-dom";
 import MyFancyComponent from "./MyMapComponent";
 
-const RestaurantSearchComponent = ({searchTerm, location, handlers}) =>
+const RestaurantSearchComponent = ({searchTerm, location,results, handlers}) =>
     <div className="container-fluid">
         <h1>Restaurant Search</h1>
         <div className="form-inline">

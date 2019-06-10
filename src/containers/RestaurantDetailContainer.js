@@ -1,11 +1,12 @@
 import {connect} from "react-redux";
 import {
+    searchBusinessDetails,
     searchLocationLocal,
     searchNearBy,
     searchTermLocal
 } from "../actions/SearchActions";
 import YelpService from "../services/YelpService";
-import RestaurantSearchComponent from "../components/RestaurantSearchComponent";
+import RestaurantDetailComponent from "../components/RestaurantDetailComponent";
 
 const stateToProperty = (state) => {
     return {
@@ -23,11 +24,12 @@ const dispatchToProperty = (dispatch) => {
             searchTermLocal: (searchTerm) => dispatch(searchTermLocal(searchTerm)),
             searchLocationLocal: (location) => dispatch(searchLocationLocal(location)),
             searchBusiness: (searchTerm, location) => yelpService.searchBusiness(searchTerm, location)
-                .then((results) => dispatch(searchNearBy(results)))
+                .then((results) => dispatch(searchNearBy(results))),
+            searchBusinessById:(id)=> yelpService.searchBusinessDetails(id).then(result=>dispatch(searchBusinessDetails(result)))
         }
     };
 };
 
-const RestaurantContainer = connect(stateToProperty, dispatchToProperty)(RestaurantSearchComponent);
+const RestaurantDetailContainer = connect(stateToProperty, dispatchToProperty)(RestaurantDetailComponent);
 
-export default RestaurantContainer;
+export default RestaurantDetailContainer;

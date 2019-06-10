@@ -55,7 +55,10 @@ class YelpService {
         return null;
     }
 
-    searchBusiness(searchTerm, location = "Boston") {
+    searchBusiness(searchTerm, location) {
+        if(location===''){
+            location='boston'
+        }
         // navigator.geolocation.getCurrentPosition((location) => console.log(location));
         let url = `${this.businessUrl}/search?location=${location}&categories=restaurant`;
         if (typeof searchTerm !== "undefined" && searchTerm.length > 0) {
