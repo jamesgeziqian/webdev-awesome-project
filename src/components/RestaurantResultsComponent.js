@@ -2,12 +2,10 @@ import React from 'react';
 import {Link} from "react-router-dom";
 
 const RestaurantResultsComponent = ({searchTerm, location, results, handlers}) => {
-    if (typeof results.businesses === "undefined" || results.businesses.length===0) {
-        console.log("default value for results");
+    if (typeof results.businesses === "undefined" || results.businesses.length === 0) {
         handlers.searchTermLocal(searchTerm);
         return null;
     }
-    // console.log(results);
     return (
         <div>
             <h3>Search Results</h3>

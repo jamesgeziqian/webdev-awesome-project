@@ -36,7 +36,7 @@ class YelpService {
                             return this.searchBusinessDetails(business["id"]);
                         }
                     )
-                )
+                );
             }
         );
     }
@@ -49,28 +49,33 @@ class YelpService {
                 url = `${url}&term=${searchTerm}`;
             }
 
-            return fetch(url, {headers: this.headers})
-                .then((response) => response.json());
+            return fetch(url, {
+                headers: this.headers
+            }).then((response) => response.json());
         }
         return null;
     }
 
     searchBusiness(searchTerm, location) {
-        if(location===''){
-            location='boston'
+        if (location === '') {
+            location = 'Boston';
         }
         // navigator.geolocation.getCurrentPosition((location) => console.log(location));
         let url = `${this.businessUrl}/search?location=${location}&categories=restaurant`;
         if (typeof searchTerm !== "undefined" && searchTerm.length > 0) {
             url = `${url}&term=${searchTerm}`;
         }
-        return fetch(url, {headers: this.headers}).then((response) => response.json());
+        return fetch(url, {
+            headers: this.headers
+        }).then((response) => response.json());
     }
 
     searchBusinessDetails(id) {
         if (typeof id !== "undefined" && id.length > 0) {
             const url = `${this.businessUrl}/${id}`;
-            return fetch(url, {headers: this.headers}).then((response) => response.json());
+            return fetch(url, {
+                headers: this.headers
+            }).then((response) => response.json());
         }
     }
 
