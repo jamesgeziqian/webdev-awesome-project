@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 const RegisterComponent =()=>
     <div className="container">
         <h1>Register</h1>
@@ -41,19 +42,19 @@ const RegisterComponent =()=>
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label"></label>
                 <div className="col-sm-10">
-                    <a className="btn btn-primary btn-block"
-                       href="../profile/profile.template.client.html">
+                    <Link className="btn btn-primary btn-block"
+                       to="..">
                         Sign up
-                    </a>
-                    <a className="btn btn-danger btn-block"
-                       href="../index.html">
+                    </Link>
+                    <Link className="btn btn-danger btn-block"
+                       to="..">
                         Cancel
-                    </a>
+                    </Link>
                     <div className="row">
                         <div className="col-6">
-                            <a href="../login/login.template.client.html">
+                            <Link to="..">
                                 Sign in
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
