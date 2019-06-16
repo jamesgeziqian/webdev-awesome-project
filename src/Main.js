@@ -7,7 +7,9 @@ import RestaurantSearchContainer from "./containers/RestaurantSearchContainer";
 import RestaurantResultsContainer from "./containers/RestaurantResultsContainer";
 import RestaurantDetailContainer from './containers/RestaurantDetailContainer';
 import RestaurantDetailComponent from "./components/RestaurantDetailComponent";
-
+import LoginComponent from "./UserComponents/LoginComponent";
+import ProfileComponent from "./UserComponents/ProfileComponent";
+import RegisterComponent from "./UserComponents/RegisterComponent";
 class Main extends React.Component {
 
     constructor(props) {
@@ -18,11 +20,22 @@ class Main extends React.Component {
     render() {
         return (
             <Provider store={this.store}>
+
                 <Router>
+                    <Link to='/login' >Login</Link>
+                    <Link to='/profile' >Profile</Link>
+                    <Link to='/register' >Register</Link>
+
                     <RestaurantSearchContainer/>
                     {/*<RestaurantSearchContainer/>*/}
                     {/*<RestaurantResultsContainer/>*/}
                     <Switch>
+                        <Route path='/login'
+                                render={()=> <LoginComponent/>}/>
+                        <Route path='/profile'
+                               render={()=> <ProfileComponent/>}/>
+                        <Route path='/register'
+                               render={()=> <RegisterComponent/>}/>
                         <Route path="/search/term/:term/location/:location"
                                render={() => <RestaurantResultsContainer state={this.store}/>}
                         />
