@@ -7,9 +7,9 @@ import RestaurantSearchContainer from "./containers/RestaurantSearchContainer";
 import RestaurantResultsContainer from "./containers/RestaurantResultsContainer";
 import RestaurantDetailContainer from './containers/RestaurantDetailContainer';
 import RestaurantDetailComponent from "./components/RestaurantDetailComponent";
-import LoginComponent from "./UserComponents/LoginComponent";
-import ProfileComponent from "./UserComponents/ProfileComponent";
-import RegisterComponent from "./UserComponents/RegisterComponent";
+import LoginComponent from "./components/UserComponents/LoginComponent";
+import ProfileComponent from "./components/UserComponents/ProfileComponent";
+import RegisterComponent from "./components/UserComponents/RegisterComponent";
 class Main extends React.Component {
 
     constructor(props) {
