@@ -1,5 +1,8 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import RestaurantSearchContainer from "../containers/RestaurantSearchContainer";
+import UserIcon from "./UserComponents/UserIcon";
+import TopMenu from "./UserComponents/TopMenu";
 
 const RestaurantResultsComponent = ({searchTerm, location, results, handlers}) => {
     if (typeof results.businesses === "undefined" || results.businesses.length === 0) {
@@ -8,6 +11,7 @@ const RestaurantResultsComponent = ({searchTerm, location, results, handlers}) =
     }
     return (
         <div>
+            <TopMenu/>
             <h3>Search Results</h3>
             <ul>
                 {

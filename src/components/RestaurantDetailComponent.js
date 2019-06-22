@@ -1,5 +1,8 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
+import RestaurantSearchContainer from "../containers/RestaurantSearchContainer";
+import UserIcon from "./UserComponents/UserIcon";
+import TopMenu from "./UserComponents/TopMenu";
 
 class RestaurantDetailComponent extends React.Component {
 
@@ -14,6 +17,7 @@ class RestaurantDetailComponent extends React.Component {
 
         return (
             <div>
+                <TopMenu/>
                 <h1>{this.props.results.name}</h1>
                 <img src={this.props.results.image_url}
                      alt={this.props.results.name}/>

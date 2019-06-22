@@ -10,6 +10,8 @@ import RestaurantDetailComponent from "./components/RestaurantDetailComponent";
 import LoginComponent from "./components/UserComponents/LoginComponent";
 import ProfileComponent from "./components/UserComponents/ProfileComponent";
 import RegisterComponent from "./components/UserComponents/RegisterComponent";
+import UserService from "./services/UserService"
+import TopMenu from "./components/UserComponents/TopMenu";
 class Main extends React.Component {
 
     constructor(props) {
@@ -20,24 +22,19 @@ class Main extends React.Component {
     render() {
         return (
             <Provider store={this.store}>
-
+                {/*<RestaurantSearchContainer/>*/}
+                {/*<RestaurantResultsContainer/>*/}
                 <Router>
-                    <Link to='/login' >Login</Link>
-                    <Link to='/profile' >Profile</Link>
-                    <Link to='/register' >Register</Link>
-
-                    <RestaurantSearchContainer/>
-                    {/*<RestaurantSearchContainer/>*/}
-                    {/*<RestaurantResultsContainer/>*/}
                     <Switch>
+
                         <Route path='/login'
-                                render={()=> <LoginComponent/>}/>
+                               render={() => <LoginComponent/>}/>
                         <Route path='/profile'
-                               render={()=> <ProfileComponent/>}/>
+                               render={() => <ProfileComponent/>}/>
                         <Route path='/register'
-                               render={()=> <RegisterComponent/>}/>
+                               render={() => <RegisterComponent/>}/>
                         <Route path="/search/term/:term/location/:location"
-                               render={() => <RestaurantResultsContainer state={this.store}/>}
+                               render={() => <RestaurantResultsContainer  state={this.store}/>}
                         />
                         <Route path="/search/term/:term/location/"
                                render={() => <RestaurantResultsContainer state={this.store}/>}
@@ -49,9 +46,10 @@ class Main extends React.Component {
                                render={() => <RestaurantResultsContainer state={this.store}/>}
                         />
                         <Route path='/result/:id'
-                               render={() =><RestaurantDetailContainer state={this.store}/>} />
-                                {/*render={() => <RestaurantDetailContainer state={this.store}/>}*/}
-
+                               render={() => <RestaurantDetailContainer state={this.store}/>}/>
+                        <Route path='/'
+                               render={() => <TopMenu/>}/>
+                        {/*render={() => <RestaurantDetailContainer state={this.store}/>}*/}
                     </Switch>
                 </Router>
             </Provider>
