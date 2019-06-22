@@ -28,11 +28,11 @@ class Main extends React.Component {
                     <Switch>
 
                         <Route path='/login'
-                               render={() => <LoginComponent/>}/>
+                               render={() => <LoginComponent state={this.store}/>}/>
                         <Route path='/profile'
-                               render={() => <ProfileComponent/>}/>
+                               render={() => <ProfileComponent state={this.store}/>}/>
                         <Route path='/register'
-                               render={() => <RegisterComponent/>}/>
+                               render={() => <RegisterComponent state={this.store}/>}/>
                         <Route path="/search/term/:term/location/:location"
                                render={() => <RestaurantResultsContainer  state={this.store}/>}
                         />
@@ -48,7 +48,7 @@ class Main extends React.Component {
                         <Route path='/result/:id'
                                render={() => <RestaurantDetailContainer state={this.store}/>}/>
                         <Route path='/'
-                               render={() => <TopMenu/>}/>
+                               render={() => <TopMenu state={this.store}/> }/>
                         {/*render={() => <RestaurantDetailContainer state={this.store}/>}*/}
                     </Switch>
                 </Router>

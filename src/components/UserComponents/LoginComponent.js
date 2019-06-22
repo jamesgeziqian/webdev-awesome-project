@@ -1,11 +1,14 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom';
 import {Link} from "react-router-dom";
 import UserService from "../../services/UserService";
+import Redirect from "react-router-dom/es/Redirect";
 
-export default class LoginComponent extends React.Component {
+ class LoginComponent extends React.Component {
     constructor(props){
         super(props);
         this.user_service = UserService.getInstance();
+        this.state={username:"", password:""}
     }
 
     render() {
@@ -22,6 +25,8 @@ export default class LoginComponent extends React.Component {
                             <input className="form-control"
                                    id="username"
                                    type="text"
+                                   value={this.state.username}
+                                   onChange={event =>this.setState({username:event.target.value})}
                                    placeholder="Alice"/>
                         </div>
                     </div>
@@ -34,7 +39,8 @@ export default class LoginComponent extends React.Component {
                             <input type="password"
                                    className="form-control wbdv-password-fld"
                                    id="password"
-                                   type="password"
+                                   value={this.state.password}
+                                   onChange={event =>this.setState({password:event.target.value})}
                                    placeholder="enter your password"/>
                         </div>
                     </div>
@@ -42,9 +48,14 @@ export default class LoginComponent extends React.Component {
                         <label className="col-sm-2 col-form-label"></label>
                         <div className="col-sm-10">
                             <button className="btn btn-primary btn-block"
-                            onClick={()=>this.user_service.try_login("alicebob","abcd").then(
-                                status=>
-                                console.log(status)
+                            onClick={()=>this.user_service.try_login(this.state.username,this.state.password).then(
+                                status => {
+                                    if (status === 200) {
+                                        this.props.history.push("/");
+                                    } else {
+                                        alert("wrong username or password entered.");
+                                    }
+                                }
                             )}>
                                 Sign in
                             </button>
@@ -71,3 +82,4 @@ export default class LoginComponent extends React.Component {
         )
     }
 }
+export default withRouter(LoginComponent);

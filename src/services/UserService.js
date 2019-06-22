@@ -9,7 +9,9 @@ export default class UserService {
         return this.instance;
     }
     endpoint = "http://localhost:3000/api"
-    checkLogin=()=>fetch(`${this.endpoint}/checkLogin`).then(
+    checkLogin=()=>fetch(`${this.endpoint}/checkLogin`, {
+        credentials:'include'
+    }).then(
         response=> response.status
     )
     try_register=(state)=>fetch(`${this.endpoint}/user`, {
@@ -33,4 +35,11 @@ export default class UserService {
             'content-type':'application/json'
         }
     }).then(res=>res.status)
+
+    logout=()=>fetch(`${this.endpoint}/logout`, {
+        method:"post",
+        headers:{
+            'content-type':'application/json'
+        }
+    }).then(response => response.json())
 }
