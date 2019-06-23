@@ -67,4 +67,11 @@ export default class UserService {
                 'content-type': 'application/json'
             }
         }).then(response=>response.json());
+    delete_current_login_user=(userId)=>fetch(`${this.endpoint}/user/${userId}`, {
+        method: "delete",
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    }).then(res=>res.json())
 }

@@ -183,7 +183,7 @@ class ProfileComponent extends React.Component {
                                 <h4>history orders </h4>
                                 {this.state.orders.map((order, index) =>
                                     <div className="list-group-item" to={`/profile/${order._id}`}
-                                          key={index}>{
+                                         key={index}>{
                                         <div>
                                             <h6>{order.restaurant.name}</h6>
                                             {this.order.orders.map((order2, index) =>
@@ -196,7 +196,7 @@ class ProfileComponent extends React.Component {
                             </div>
                         </div>
                         }
-                        {this.state.userType==="BusinessMan"&&
+                        {this.state.userType === "BusinessMan" &&
                         <div className="list-group">
                             <h4>Owned Business </h4>
                             {this.state.restaurants.map((restaurant, index) =>
@@ -228,12 +228,15 @@ class ProfileComponent extends React.Component {
                                 }>
                             Update
                         </button>
-                        <Link to="/" className="btn btn-danger btn-block">
-                            Cancel
+                        <Link to="/" className="btn btn-warning btn-block">
+                            Back to main page
                         </Link>
+                        <button className="btn btn-danger btn-block"
+                                onClick={() => this.delete_user_handler()}>
+                            delete my account
+                        </button>
                     </div>
                 </div>
-
 
             </div>
         )
@@ -267,6 +270,20 @@ class ProfileComponent extends React.Component {
                 }
             )
         }
+    }
+
+    delete_user_handler() {
+        this.user_service.delete_current_login_user(this.state.userId).then(
+            res => {
+            console.log(res);
+                alert(`Your account have been deleted. \n You are going to log out...`);
+                this.user_service.logout().then(
+                    res => {
+                        console.log(res);
+                    }
+                )
+                this.props.history.push("/");
+        })
     }
 }
 
