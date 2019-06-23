@@ -20,7 +20,23 @@ class RestaurantDetailComponent extends React.Component {
             historyOrders: [],
             liked: false
         };
-        this.init();
+        this.props.handlers.searchBusinessById(this.id)
+            .then(() => this.props.handlers.findRestaurant(this.id))
+            .then(() => this.props.handlers.checkLogin())
+            .then(() => {
+                const restaurant = this.props.restaurant;
+                this.setState({
+                    menu: (typeof restaurant === "undefined" || typeof restaurant.menu === "undefined") ? [] : restaurant.menu,
+                    order: this.state.order,
+                    editing_dish: this.state.editing_dish,
+                    favoringCustomers: (typeof restaurant === "undefined" || typeof restaurant.favoringCustomers === "undefined") ? [] : restaurant.favoringCustomers,
+                    historyOrders: (typeof restaurant === "undefined" || typeof restaurant.historyOrders === "undefined") ? [] : restaurant.historyOrders,
+                    liked: typeof this.props.restaurant !== "undefined"
+                        && typeof this.props.user !== "undefined"
+                        && this.props.user.userType === "Customer"
+                        && this.props.user.favorites.filter((item) => item._id === this.props.restaurant._id).length === 0
+                });
+            });
     }
 
     init() {
@@ -179,9 +195,9 @@ class RestaurantDetailComponent extends React.Component {
                         <div>
                             <div className="form-group">
                                 {this.state.menu.map((dish, index) =>
-                                    <div className="form-group-item" key={index}>
+                                    <div className="form-group-item form-inline" key={index}>
 
-                                        <button className="btn btn-primary"
+                                        <button className="btn btn-primary col-3"
                                                 onClick={
                                                     () => {
                                                         const newOrder = Array.from(this.state.order);
@@ -192,8 +208,8 @@ class RestaurantDetailComponent extends React.Component {
                                                 }>
                                             add one
                                         </button>
-                                        <label className="">{dish}</label>
-                                        <button className="btn btn-primary"
+                                        <label className="col-6 bg-warning">{dish}</label>
+                                        <button className="btn btn-primary col-3"
                                                 onClick={
                                                     () => {
                                                         // const index2 = this.state.menu.indexOf(dish);

@@ -22,7 +22,7 @@ export default class UserIcon extends React.Component {
     //             if (status === 200) {
     //                 this.setState({login: true})
     //             } else {
-    
+
     //                 this.setState({login: false})
     //             }
     //         }
