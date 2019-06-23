@@ -11,10 +11,11 @@ class RestaurantDetailComponent extends React.Component {
         const id = window.location.pathname.split("/")[2];
         console.log(id);
         this.props.handlers.searchBusinessById(id);
+        this.props.handlers.findRestaurant(id);
+        this.props.handlers.checkLogin();
     }
 
     render() {
-
         return (
             <div>
                 <TopMenu/>
@@ -33,6 +34,32 @@ class RestaurantDetailComponent extends React.Component {
                         : null
                 }
                 <h3>{"price: " + this.props.results.price}</h3>
+                {
+                    typeof this.props.restaurant !== "undefined" ?
+                        <button className="btn btn-success">
+                            Order food here!
+                        </button>
+                        :
+                        <button onClick={() => console.log(this.props.user)}
+                                className="btn btn-success disabled">
+                            Not hosted
+                        </button>
+                }
+                {
+                    typeof this.props.user !== "undefined" && this.props.user.userType === "BusinessMan" ?
+                        typeof this.props.restaurant === "undefined" ?
+                        <button onClick={() => this.props.handlers.claimRestaurant(this.props.results.id)}
+                                className="btn btn-success">
+                            Claim
+                        </button>
+                            :
+                            <button onClick={() => console.log(this.props.restaurant)}
+                                    className="btn btn-success disabled">
+                                This restaurant has already been claimed
+                            </button>
+                        :
+                        <div/>
+                }
             </div>
         );
     }

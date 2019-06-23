@@ -6,16 +6,21 @@ import {
     UPDATE_RESTAURANT
 } from "../constants/RestaurantConstants";
 
-export const createRestaurant = (restaurantName) => {
-    return {type: CREATE_RESTAURANT, name: restaurantName};
+export const createRestaurant = (restaurant) => {
+    return {type: CREATE_RESTAURANT, restaurant: restaurant};
 };
 
-export const findAllRestaurants = () => {
-    return {type: FIND_ALL_RESTAURANT};
+export const findAllRestaurants = (restaurants) => {
+    return {type: FIND_ALL_RESTAURANT, restaurants: restaurants};
 };
 
-export const findRestaurant = (restaurantId) => {
-    return {type: FIND_RESTAURANT, id: restaurantId};
+export const findRestaurant = (restaurant) => {
+    if (typeof restaurant !== "undefined") {
+        return {type: FIND_RESTAURANT, restaurant: restaurant};
+    } else {
+        return {type: FIND_RESTAURANT}
+    }
+
 };
 
 export const deleteRestaurant = (restaurantId) => {

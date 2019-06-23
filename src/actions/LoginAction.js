@@ -6,3 +6,7 @@ export const login_status = () => {
 export const logout_status = () => {
     return {type: "LOGOUT"};
 };
+
+export const checkProfile = (res) => {
+    return {type: "PROFILE", res: res};
+};

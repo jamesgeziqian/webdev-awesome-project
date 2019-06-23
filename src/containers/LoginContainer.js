@@ -5,7 +5,6 @@ import {login_status, logout_status} from "../actions/LoginAction";
 import UserIcon from "../components/UserComponents/UserIcon";
 
 const stateToProperty = (state) => {
-    console.log(state.LoginReducer.status);
     return {
         status:state.LoginReducer.status
     };

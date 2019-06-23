@@ -1,4 +1,3 @@
-// 商店街管理委员会
 class RestaurantService {
 
     static instance;
@@ -10,29 +9,64 @@ class RestaurantService {
         return this.instance;
     }
 
-    // 为了拯救非洲难民，几位猫娘决定开一家咖啡厅名为Rabbit House...
-    createRestaurant(restaurantName) {
-
+    constructor() {
+        this.port = 3000;
+        if (window.location.hostname === "localhost") { // adaption between local ports and on the PaaS server
+            this.url = 'http://' + window.location.hostname + ":" + this.port;
+        } else {
+            this.url = 'https://webdev-awesome-project-server.herokuapp.com/';
+        }
+        this.url +=  '/api/restaurant';
     }
 
-    // 逛街
+    claimRestaurant(yelpId) {
+        return fetch(`${this.url}/${yelpId}`, {
+            credentials: "include",
+            method: 'POST'
+        }).then((res) => {
+            console.log(res);
+            return res.json();
+        });
+    }
+
     findAllRestaurants() {
-        return null;
+        return fetch(this.url, {
+            credentials: "include",
+            method: "GET"
+        }).then((res) => {
+            console.log(res);
+            return res.json()
+        });
     }
 
-    // 服务器检查Rabbit House 是否存在，若存在，返回Rabbit House 的菜单 which is an ArrayOfFoods
-    findRestaurantById(restaurantId) {
-
+    findRestaurantById(yelpId) {
+        console.log(yelpId);
+        return fetch(`${this.url}/${yelpId}`, {
+            credentials: "include",
+            method: "GET"
+        }).then((res) => {
+            if (res.status === 200) {
+                return res.json();
+            }
+        });
     }
 
-    // 我Rabbit House 就算是倒闭，也不会...
-    deleteRestaurant() {
-
+    dropRestaurant(restaurantId) {
+        return fetch(`${this.url}/${restaurantId}`, {
+            credentials: "include",
+            method: "DELETE"
+        }).then((res) => res.json());
     }
 
-    // Rabbit House 店面装修
     updateRestaurant(restaurantId, restaurant) {
-
+        return fetch(`${this.url}/${restaurantId}`, {
+            credentials: "include",
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: restaurant
+        })
     }
 
 }
