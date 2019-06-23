@@ -182,14 +182,12 @@ class ProfileComponent extends React.Component {
                             </div>
                             <div className="list-group">
                                 <h4>history orders </h4>
-                                {console.log(this.state.orders)}
                                 {this.state.orders.map((order, index) =>
-                                    <div className="list-group-item"
+                                    <div className="container"
                                          key={index}>{
-                                        <div>
-                                            <h6>{order.restaurant.name}</h6>
-                                            {order.orders.map((order2, index) =>
-                                                <p key={index}> {order2}</p>)
+                                        <div className="form-inline form-group bg-warning">
+                                            {order.orders.map((order2, index2) =>
+                                                <div className="form-group-item" key={index2}> {order2+","}&nbsp;</div>)
                                             }
                                         </div>
                                     }
