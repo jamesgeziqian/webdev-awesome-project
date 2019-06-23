@@ -25,14 +25,16 @@ export default class UserIcon extends React.Component {
     //     )
     render = () =>
 
-            <div className="btn btn-outline-info float-lg-right"
-                 onMouseEnter={() =>
-                 {
+        <div className="btn btn-outline-info float-lg-right"
+             onMouseEnter={
+                 () => {
                      this.props.handlers.loginProcess();
-                     this.setState({show_user: true});}}
-                 onMouseLeave={() => this.setState({show_user: false})}>
-                user
-            {this.state.show_user&&
+                     this.setState({show_user: true});
+                 }
+             }
+             onMouseLeave={() => this.setState({show_user: false})}>
+            user
+            {this.state.show_user &&
             <div>
                 {this.props.status === "LOGOUT" &&
                 <div>
@@ -51,8 +53,7 @@ export default class UserIcon extends React.Component {
                     >Profile</Link>
                     <Link className="btn btn-warning float-lg-right" to='/'
                           onClick={() => this.user_service.logout().then(
-                              res =>
-                              {
+                              res => {
                                   console.log(res);
                                   this.props.handlers.loginProcess();
                               }
@@ -61,7 +62,7 @@ export default class UserIcon extends React.Component {
                 </div>
                 }
             </div>}
-            </div>
+        </div>
 
 }
 

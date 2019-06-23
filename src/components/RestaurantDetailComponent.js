@@ -95,7 +95,7 @@ class RestaurantDetailComponent extends React.Component {
                             typeof this.props.user !== "undefined" && this.props.user.userType === "BusinessMan" ?
                                 typeof this.props.restaurant === "undefined" ?
                                     <button onClick={() =>
-                                        this.props.handlers.claimRestaurant(this.props.results.id)
+                                        this.props.handlers.claimRestaurant(this.props.results.id, this.props.results.name)
                                             .then(() => this.init())
                                     }
                                             className="btn btn-success">
@@ -123,8 +123,10 @@ class RestaurantDetailComponent extends React.Component {
                                 :
                                 <div/>
                         }
-                        {typeof this.props.restaurant !== "undefined" && typeof this.props.user !== "undefined" &&
-                        this.props.user.userType === "BusinessMan" &&
+                        {typeof this.props.restaurant !== "undefined"
+                        && typeof this.props.user !== "undefined"
+                        && this.props.user.userType === "BusinessMan"
+                        && this.props.restaurant.owner._id === this.props.user._id &&
                         <div>
                             <div className="form-inline">
                                 <input className="form-control" value={this.state.editing_dish}
@@ -171,8 +173,9 @@ class RestaurantDetailComponent extends React.Component {
                             </div>
                         </div>
                         }
-                        {typeof this.props.restaurant !== "undefined" && typeof this.props.user !== "undefined" &&
-                        this.props.user.userType === "Customer" &&
+                        {typeof this.props.restaurant !== "undefined"
+                        && typeof this.props.user !== "undefined"
+                        && this.props.user.userType === "Customer" &&
                         <div>
                             <div className="form-group">
                                 {this.state.menu.map((dish, index) =>
@@ -240,7 +243,7 @@ class RestaurantDetailComponent extends React.Component {
                                         this.restaurant_service.like_this_restaurant(this.props.user._id, this.props.restaurant._id).then(
                                             status => {
                                                 if (status == 200) {
-                                                    this.setState({liked:!this.state.liked});
+                                                    this.setState({liked: !this.state.liked});
                                                     this.init();
                                                 }
                                             }
@@ -253,7 +256,7 @@ class RestaurantDetailComponent extends React.Component {
                                         this.restaurant_service.unlike_this_restaurant(this.props.user._id, this.props.restaurant._id).then(
                                             status => {
                                                 if (status == 200) {
-                                                    this.setState({liked:!this.state.liked});
+                                                    this.setState({liked: !this.state.liked});
                                                     this.init();
                                                 }
                                             }

@@ -45,7 +45,7 @@ const dispatchToProperty = (dispatch) => {
                 }),
             checkLogin: () => userService.profile_current_user()
                 .then((res) => dispatch(checkProfile(res))),
-            claimRestaurant: (yelpId) => restaurantService.claimRestaurant(yelpId)
+            claimRestaurant: (yelpId, name) => restaurantService.claimRestaurant(yelpId, name)
                 .then((restaurant) => dispatch(createRestaurant(restaurant)))
         }
     };

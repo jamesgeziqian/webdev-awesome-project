@@ -19,8 +19,8 @@ class RestaurantService {
         this.url +=  '/api';
     }
 
-    claimRestaurant(yelpId) {
-        return fetch(`${this.url}/restaurant/${yelpId}`, {
+    claimRestaurant(yelpId, name) {
+        return fetch(`${this.url}/restaurant/${yelpId}?name=${name}`, {
             credentials: "include",
             method: 'POST'
         }).then((res) => {

@@ -156,7 +156,8 @@ class ProfileComponent extends React.Component {
                         </div>
                     </div>
                     <div className="col-4">
-                        {this.state.userType === "Customer" &&
+                        {this.state.userType === "Customer"&&
+                        // typeof this.state.orders!=="undefined" &&
                         <div>
                             <div className="list-group">
                                 <h4>followers </h4>
@@ -181,13 +182,14 @@ class ProfileComponent extends React.Component {
                             </div>
                             <div className="list-group">
                                 <h4>history orders </h4>
+                                {console.log(this.state.orders)}
                                 {this.state.orders.map((order, index) =>
-                                    <div className="list-group-item" to={`/profile/${order._id}`}
+                                    <div className="list-group-item"
                                          key={index}>{
                                         <div>
                                             <h6>{order.restaurant.name}</h6>
-                                            {this.order.orders.map((order2, index) =>
-                                                <p> {order2}</p>)
+                                            {order.orders.map((order2, index) =>
+                                                <p key={index}> {order2}</p>)
                                             }
                                         </div>
                                     }
