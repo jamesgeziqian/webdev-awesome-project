@@ -38,7 +38,7 @@ export default class UserIcon extends React.Component {
     }
     render = () =>
 
-        <div className="btn btn-outline-info float-lg-right"
+        <div className="btn btn-outline-info float-right"
              onMouseEnter={
                  () => {
                      this.setState({show_user: true});

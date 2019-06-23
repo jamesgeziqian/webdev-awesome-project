@@ -117,18 +117,16 @@ class PublicProfile extends React.Component {
                                               key={index}>{favorite.name}</Link>
                                     )}
                                 </div>
-                                <div className="list-group">
+                                <div className="container">
                                     <h4>history orders </h4>
                                     {this.state.orders.map((order, index) =>
-                                        <div className="list-group-item" to={`/profile/${order._id}`}
-                                             key={index}>{
-                                            <div>
-                                                <h6>{order.restaurant.name}</h6>
-                                                {this.order.orders.map((order2, index) =>
-                                                    <p> {order2}</p>)
+                                        <div className="form-inline form-group" to={`/profile/${order._id}`}
+                                             key={index}>
+
+                                                {order.orders.map((order2, index2) =>
+                                                    <div className="form-group-item bg-warning"
+                                                         key={index2}> {order2+","}&nbsp;</div>)
                                                 }
-                                            </div>
-                                        }
                                         </div>
                                     )}
                                 </div>
