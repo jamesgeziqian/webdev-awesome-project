@@ -13,7 +13,7 @@ class PublicProfile extends React.Component {
         this.set_user_state();
     }
     set_user_state() {
-        let cur_user = this.user_service.profile_public_user().then(
+        let cur_user = this.user_service.profile_public_user(this.props.match.params.userId).then(
             res=> {
                 this.setState({
                     username: res.username,
