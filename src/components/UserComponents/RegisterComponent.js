@@ -2,7 +2,9 @@ import React from 'react'
 import {Router, Route,Link} from "react-router-dom";
 import UserService from "../../services/UserService";
 import { Redirect } from "react-router-dom";
-export default class RegisterComponent extends React.Component {
+import { withRouter } from 'react-router-dom';
+
+class RegisterComponent extends React.Component {
     constructor(props) {
         super(props);
         this.user_service = UserService.getInstance();
@@ -173,20 +175,15 @@ export default class RegisterComponent extends React.Component {
     sign_up_handler() {
       this.user_service.try_register(this.state).then(res => {
           if(this.state.password!==this.state.verify_password){
-              alert("passwords not same");
+              alert("the second password is not the same as the first one!");
               return;
           }
-          if(typeof res.message==="undefined"){
-              this.user_service.try_login(res.username, res.password).then(
-                  res=>{if(res===200){
-                      return <Redirect to='/'/>
-                  }else{
-                      alert("login failed.");
-                  }}
-              )
+          if(typeof res.message!=="undefined"&&res.message==="Login success"){
+              this.props.history.push("/");
           }else{
-              alert(res.message);
+              alert("Login failed!");
           }
       });
     }
 }
+export default withRouter(RegisterComponent);
