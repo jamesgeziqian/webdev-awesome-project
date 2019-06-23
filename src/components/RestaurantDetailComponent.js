@@ -82,9 +82,9 @@ class RestaurantDetailComponent extends React.Component {
                         <h3>{"price: " + this.props.results.price}</h3>
                         {
                             typeof this.props.restaurant !== "undefined" ?
-                                <button className="btn btn-success">
-                                    Order food here!
-                                </button>
+                                <label>
+                                    Welcome to order food!
+                                </label>
                                 :
                                 <button onClick={() => console.log(this.props.user)}
                                         className="btn btn-success disabled">
