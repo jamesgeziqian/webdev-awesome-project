@@ -10,7 +10,8 @@ export default class UserIcon extends React.Component {
         this.user_service = UserService.getInstance();
         this.state = {
             show_user: false,
-            login:false
+            login:false,
+            username:""
         }
         this.checkLogin();
         // this.checkLogin();
@@ -31,6 +32,13 @@ export default class UserIcon extends React.Component {
         this.user_service.checkLogin().then(status => {
             if (status === 200) {
                 this.setState({login: true})
+                this.user_service.profile_current_user().then(res=>{
+                 if(typeof res.userType!=="undefined"){
+                     this.setState({username:res.username});
+                 }else{
+                     alert("UNEXPECTED ERROR HAPPENED, MAYBE DUE TO BAD NETWORK.");
+                 }
+                })
             } else {
                 this.setState({login: false})
             }
@@ -64,6 +72,7 @@ export default class UserIcon extends React.Component {
                 {/*{this.props.status === "LOGIN" &&*/}
                 {this.state.login &&
                 <div>
+                    <h3>{this.state.username}</h3>
                     <Link className="btn btn-primary float-lg-right" to='/profile'
                         // onClick={()=>this.props.handlers.loginProcess()}
                     >Profile</Link>

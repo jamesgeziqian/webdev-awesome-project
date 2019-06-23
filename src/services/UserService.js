@@ -89,13 +89,16 @@ export default class UserService {
 
     followUser = (userId, followingId) => {
         return fetch(`${this.endpoint}/customer/${userId}/follows/${followingId}`, {
+            credentials:'include',
             method: 'PUT'
-        }).then((res) => res.json());
+        }).then(res=>res.status);
     };
 
     unfollowUser = (userId, followingId) => {
         return fetch(`${this.endpoint}/customer/${userId}/follows/${followingId}`, {
+            credentials:'include',
             method: 'DELETE'
-        }).then((res) => res.json());
+        }).then(res=>res.status);
     }
+
 }

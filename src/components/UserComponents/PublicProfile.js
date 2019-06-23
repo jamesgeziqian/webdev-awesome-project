@@ -18,6 +18,7 @@ class PublicProfile extends React.Component {
         let cur_user = this.user_service.profile_public_user(this.props.match.params.userId).then(
             res => {
                 this.setState({
+                    public_user_id:this.props.match.params.userId,
                     username: res.username,
                     userType: res.userType,
                     followers: res.followers,
@@ -25,7 +26,9 @@ class PublicProfile extends React.Component {
                     favorites: res.favorites,
                     orders: res.orders,
                     restaurants: res.restaurants,
-                    redirect: false
+                    profile_current_user:undefined,
+                    redirect: false,
+                    followed:false
                 })
             })
         this.checkRedirect();
@@ -36,9 +39,29 @@ class PublicProfile extends React.Component {
 
             res => {
                 if (typeof res.userType !== "undefined" && res._id === this.props.match.params.userId) {
-                    this.setState({redirect: true})
+                    this.setState({
+                        redirect: true,
+                        profile_current_user:res,
+                        followed: typeof res !== "undefined"
+                            && res.userType === "Customer"
+                            && res.followings.filter((item) => item._id === this.state.public_user_id).length !== 0
+                    })
                 } else {
-                    this.setState({redirect: false})
+                    if(typeof res.userType === "undefined"){
+                        this.setState({
+                            redirect: false,
+                            profile_current_user:undefined,
+                            followed: false
+                        });
+                    }else{
+                        this.setState({
+                            redirect: false,
+                            profile_current_user:res,
+                            followed: typeof res !== "undefined"
+                                && res.userType === "Customer"
+                                && res.followings.filter((item) => item._id === this.state.public_user_id).length !== 0
+                        });
+                    }
                 }
             }
         )
@@ -146,15 +169,27 @@ class PublicProfile extends React.Component {
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label"></label>
                         <div className="col-sm-10">
-                            <button className="btn btn-success btn-block"
+                            {typeof this.state.profile_current_user!=="undefined"&&
+                            this.state.profile_current_user.userType==="Customer"&&this.state.userType==="Customer"&&
+                            !this.state.followed&&<button className="btn btn-success btn-block"
                                     onClick={() => {
-                                        this.update_handler();
+                                        this.follow_handler();
                                     }
                                     }>
-                                Update
-                            </button>
+                                follow this person
+                            </button>}
+
+                            {typeof this.state.profile_current_user!=="undefined"&&
+                            this.state.profile_current_user.userType==="Customer"&&this.state.userType==="Customer"&&
+                            this.state.followed&&<button className="btn btn-success btn-block"
+                                                          onClick={() => {
+                                                              this.unfollow_handler();
+                                                          }
+                                                          }>
+                                cancel follow
+                            </button>}
                             <Link to="/" className="btn btn-danger btn-block">
-                                Cancel
+                                back to main page
                             </Link>
                         </div>
                     </div>
@@ -162,38 +197,28 @@ class PublicProfile extends React.Component {
             )
         }
     }
-
-
-
-
-
-    update_handler() {
-        if (this.state.password !== this.state.verify_password) {
-            alert("the second password is not the same as the first one!");
-            return;
-        } else {
-            this.user_service.profile_update_user({
-                username: this.state.username,
-                password: this.state.password,
-                phone: this.state.phone,
-                email: this.state.email,
-                zip: this.state.zip,
-            }, this.state.userId).then(
-                res => {
-                    if (res.message === "Update success!") {
-                        alert(`updated successfully! \n You are going to log out...`);
-                        this.user_service.logout().then(
-                            res => {
-                                console.log(res);
-                            }
-                        )
-                        this.props.history.push("/");
-                    } else {
-                        alert(res.message);
-                    }
+    unfollow_handler() {
+        this.user_service.unfollowUser(this.state.profile_current_user._id, this.state.public_user_id).then(
+            status => {
+                if (status === 200) {
+                    this.setState({followed: false})
+                } else {
+                    this.setState({followed: true})
                 }
-            )
+            }
+        )
+    }
+
+    follow_handler() {
+    this.user_service.followUser(this.state.profile_current_user._id,this.state.public_user_id).then(
+        status=>{
+            if(status===200){
+                this.setState({followed:true})
+            }else{
+                this.setState({followed:false})
+            }
         }
+    )
     }
 }
 
