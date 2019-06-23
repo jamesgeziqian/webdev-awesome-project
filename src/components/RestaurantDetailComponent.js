@@ -213,12 +213,12 @@ class RestaurantDetailComponent extends React.Component {
                                 }
                             </div>
                             <h6>current order: </h6>
-                            <ul>
+                            <div className="form-group form-inline">
                                 {
                                     this.state.order.map((dish, index) =>
-                                        <li key={index}>{dish}</li>)
+                                        <div className="form-group-item" key={index}>{dish+","}&nbsp;</div>)
                                 }
-                            </ul>
+                            </div>
                             <button className="btn btn-success"
                                     onClick={() =>
                                         this.restaurant_service.send_order(this.props.restaurant._id, this.state.order).then(res => {
@@ -268,15 +268,18 @@ class RestaurantDetailComponent extends React.Component {
                             <h4>customers who liked here: </h4>
                             <div className="list-group">
                                 {this.state.favoringCustomers.map((customer, index) =>
-                                    <Link className="list-group-item" to={`/profile/${customer._id}`} key={index}/>
+                                    <Link className="list-group-item" to={`/profile/${customer._id}`} key={index}>
+                                        {customer.username}
+                                    </Link>
                                 )}
                             </div>
                             <h4>history orders: </h4>
-                            <div className="list-group">
+                            <div className="container">
                                 {this.state.historyOrders.map((order, index) =>
-                                    <div className="list-group-item form-inline" key={index}>
-                                        {order.orders.map((dish, index) =>
-                                            <div key={index}>{dish}</div>
+                                    <div className="form-inline form-group bg-warning" key={index}>
+                                        {
+                                            order.orders.map((dish, index2) =>
+                                            <div className="form-group-item" key={index2}>{dish+","}&nbsp;</div>
                                         )}
                                     </div>
                                 )}
