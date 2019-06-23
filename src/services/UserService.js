@@ -9,12 +9,22 @@ export default class UserService {
         return this.instance;
     }
 
-    endpoint = "http://localhost:3000/api";
+    constructor() {
+        this.endpoint = 3000;
+        if (window.location.hostname === "localhost") { // adaption between local ports and on the PaaS server
+            this.url = 'http://' + window.location.hostname + ":" + this.port;
+        } else {
+            this.url = 'https://webdev-awesome-project-server.herokuapp.com/';
+        }
+        this.url += '/api';
+    }
+
     checkLogin = () => fetch(`${this.endpoint}/checkLogin`, {
         credentials: 'include'
     }).then(
         response => response.status
     );
+
     try_register = (state) => fetch(`${this.endpoint}/user`, {
         method: 'post',
         credentials: 'include',
@@ -23,6 +33,7 @@ export default class UserService {
             'content-type': 'application/json'
         }
     }).then(response => response.json());
+
     try_login = (username, password) => fetch(`${this.endpoint}/login`, {
         method: "post",
         credentials: 'include',
@@ -61,17 +72,30 @@ export default class UserService {
     }).then(response => response.json());
 
     profile_public_user = (userId) => fetch(`${this.endpoint}/user/${userId}`, {
-            method: "get",
-            credentials: 'include',
-            headers: {
-                'content-type': 'application/json'
-            }
-        }).then(response=>response.json());
-    delete_current_login_user=(userId)=>fetch(`${this.endpoint}/user/${userId}`, {
+        method: "get",
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    }).then(response => response.json());
+
+    delete_current_login_user = (userId) => fetch(`${this.endpoint}/user/${userId}`, {
         method: "delete",
         credentials: 'include',
         headers: {
             'content-type': 'application/json'
         }
-    }).then(res=>res.json())
+    }).then(res => res.json());
+
+    followUser = (userId, followingId) => {
+        return fetch(`${this.endpoint}/customer/${userId}/follows/${followingId}`, {
+            method: 'PUT'
+        }).then((res) => res.json());
+    };
+
+    unfollowUser = (userId, followingId) => {
+        return fetch(`${this.endpoint}/customer/${userId}/follows/${followingId}`, {
+            method: 'DELETE'
+        }).then((res) => res.json());
+    }
 }
