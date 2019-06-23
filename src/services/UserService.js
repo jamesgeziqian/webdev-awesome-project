@@ -14,7 +14,7 @@ export default class UserService {
         if (window.location.hostname === "localhost") { // adaption between local ports and on the PaaS server
             this.endpoint = 'http://' + window.location.hostname + ":" + this.port;
         } else {
-            this.endpoint = 'https://webdev-awesome-project-server.herokuapp.com/';
+            this.endpoint = 'https://webdev-awesome-project-server.herokuapp.com';
         }
         this.endpoint += '/api';
     }
