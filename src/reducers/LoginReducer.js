@@ -1,16 +1,11 @@
-
-const LoginReducer = (state = {status:"LOGOUT"}, action) => {
+const LoginReducer = (state = {status: "LOGOUT"}, action) => {
     switch (action.type) {
         case "LOGIN":
-            return {status:"LOGIN"};
+            return {status: "LOGIN"};
         case "LOGOUT":
-            return {status:"LOGOUT"};
+            return {status: "LOGOUT"};
         case "PROFILE":
-            // if (action.res.status === 200) {
-                return {status: "LOGIN", user: action.res};
-            // } else {
-            //     return {status: "LOGOUT"};
-            // }
+            return {status: "LOGIN", user: action.res};
         default:
             return state;
     }
