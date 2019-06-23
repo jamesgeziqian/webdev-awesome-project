@@ -25,28 +25,28 @@ export default class UserIcon extends React.Component {
     //     )
     render = () =>
         <div>
-            {this.props.status==="LOGOUT"&&
-                <div>
-                    <Link className="btn btn-primary float-lg-right" to='/login'
-                            // onClick={()=>this.props.handlers.loginProcess()}
-                    >Login</Link>
-                    <Link className="btn btn-warning float-lg-right" to='/register'
-                            // onClick={()=>this.props.handlers.loginProcess()}
-                    >Sign up</Link>
-                </div>
+            {this.props.status === "LOGOUT" &&
+            <div>
+                <Link className="btn btn-primary float-lg-right" to='/login'
+                    // onClick={()=>this.props.handlers.loginProcess()}
+                >Login</Link>
+                <Link className="btn btn-warning float-lg-right" to='/register'
+                    // onClick={()=>this.props.handlers.loginProcess()}
+                >Sign up</Link>
+            </div>
             }
-            {this.props.status==="LOGIN"&&
-                <div>
-                    <Link className="btn btn-primary float-lg-right" to='/profile'
-                          // onClick={()=>this.props.handlers.loginProcess()}
-                    >Profile</Link>
-                    <Link className="btn btn-warning float-lg-right" to='/'
-                          onClick={this.user_service.logout().then(
-                              res=>console.log(res)
-                          )}
-                          // onClick={()=>this.props.handlers.loginProcess()}
-                    >Log out</Link>
-                </div>
+            {this.props.status === "LOGIN" &&
+            <div>
+                <Link className="btn btn-primary float-lg-right" to='/profile'
+                    // onClick={()=>this.props.handlers.loginProcess()}
+                >Profile</Link>
+                <Link className="btn btn-warning float-lg-right" to='/'
+                      onClick={() => this.user_service.logout().then(
+                          res => console.log(res)
+                      )}
+                    // onClick={()=>this.props.handlers.loginProcess()}
+                >Log out</Link>
+            </div>
             }
         </div>
 
