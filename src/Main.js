@@ -31,7 +31,9 @@ class Main extends React.Component {
 
                         <Route path='/login'
                                render={() => <LoginComponent state={this.store}/>}/>
-                        <Route path='/profile'
+                        <Route exact path='/profile/:userId'
+                               render={props => <PublicProfile {...props}/>}/>
+                        <Route exact path='/profile'
                                render={() => <ProfileComponent state={this.store}/>}/>
                         <Route path='/register'
                                render={() => <RegisterComponent state={this.store}/>}/>
@@ -51,8 +53,7 @@ class Main extends React.Component {
                                render={() => <RestaurantDetailContainer state={this.store}/>}/>
                         <Route path='/'
                                render={() => <TopMenu state={this.store}/>}/>
-                        <Route path='/profile/:userId'
-                               render={props => <PublicProfile {...props}/>}/>
+
                             {/*render={() => <RestaurantDetailContainer state={this.store}/>}*/}
                     </Switch>
                 </Router>
