@@ -10,7 +10,7 @@ export default class UserService {
     }
 
     constructor() {
-        this.endpoint = 3000;
+        this.port = 3000;
         if (window.location.hostname === "localhost") { // adaption between local ports and on the PaaS server
             this.endpoint = 'http://' + window.location.hostname + ":" + this.port;
         } else {
