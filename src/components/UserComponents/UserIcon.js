@@ -71,7 +71,8 @@ export default class UserIcon extends React.Component {
                           onClick={() => this.user_service.logout().then(
                               res => {
                                   console.log(res);
-                                  this.props.handlers.loginProcess();
+                                  // this.props.handlers.loginProcess();
+                                  this.checkLogin();
                               }
                           )}
                     >Log out</Link>

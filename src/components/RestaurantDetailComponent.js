@@ -4,6 +4,7 @@ import RestaurantSearchContainer from "../containers/RestaurantSearchContainer";
 import UserIcon from "./UserComponents/UserIcon";
 import TopMenu from "./UserComponents/TopMenu";
 import RestaurantService from '../services/RestaurantService'
+import UserService from '../services/UserService'
 
 class RestaurantDetailComponent extends React.Component {
 
@@ -12,6 +13,7 @@ class RestaurantDetailComponent extends React.Component {
         this.id = window.location.pathname.split("/")[2];
         console.log(this.id);
         this.restaurant_service = RestaurantService.getInstance();
+        this.user_service =UserService.getInstance();
         this.state = {
             menu: [],
             order: [],
@@ -20,23 +22,7 @@ class RestaurantDetailComponent extends React.Component {
             historyOrders: [],
             liked: false
         };
-        this.props.handlers.searchBusinessById(this.id)
-            .then(() => this.props.handlers.findRestaurant(this.id))
-            .then(() => this.props.handlers.checkLogin())
-            .then(() => {
-                const restaurant = this.props.restaurant;
-                this.setState({
-                    menu: (typeof restaurant === "undefined" || typeof restaurant.menu === "undefined") ? [] : restaurant.menu,
-                    order: this.state.order,
-                    editing_dish: this.state.editing_dish,
-                    favoringCustomers: (typeof restaurant === "undefined" || typeof restaurant.favoringCustomers === "undefined") ? [] : restaurant.favoringCustomers,
-                    historyOrders: (typeof restaurant === "undefined" || typeof restaurant.historyOrders === "undefined") ? [] : restaurant.historyOrders,
-                    liked: typeof this.props.restaurant !== "undefined"
-                        && typeof this.props.user !== "undefined"
-                        && this.props.user.userType === "Customer"
-                        && this.props.user.favorites.filter((item) => item._id === this.props.restaurant._id).length === 0
-                });
-            });
+        this.init();
     }
 
     init() {
@@ -54,7 +40,7 @@ class RestaurantDetailComponent extends React.Component {
                     liked: typeof this.props.restaurant !== "undefined"
                         && typeof this.props.user !== "undefined"
                         && this.props.user.userType === "Customer"
-                        && this.props.user.favorites.filter((item) => item._id === this.props.restaurant._id).length === 0
+                        && this.props.user.favorites.filter((item) => item._id === this.props.restaurant._id).length !== 0
                 });
             });
     }
