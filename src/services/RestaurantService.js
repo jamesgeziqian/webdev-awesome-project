@@ -14,7 +14,7 @@ class RestaurantService {
         if (window.location.hostname === "localhost") { // adaption between local ports and on the PaaS server
             this.url = 'http://' + window.location.hostname + ":" + this.port;
         } else {
-            this.url = 'https://webdev-awesome-project-server.herokuapp.com/';
+            this.url = 'https://webdev-awesome-project-server.herokuapp.com';
         }
         this.url +=  '/api';
     }
