@@ -173,11 +173,11 @@ class RegisterComponent extends React.Component {
     //     });
     // }
     sign_up_handler() {
+        if(this.state.password!==this.state.verify_password){
+            alert("the second password is not the same as the first one!");
+            return;
+        }
       this.user_service.try_register(this.state).then(res => {
-          if(this.state.password!==this.state.verify_password){
-              alert("the second password is not the same as the first one!");
-              return;
-          }
           if(typeof res.message!=="undefined"&&res.message==="Login success"){
               this.props.history.push("/");
           }else if(typeof res.message!=="undefined"){
