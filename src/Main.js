@@ -12,6 +12,8 @@ import ProfileComponent from "./components/UserComponents/ProfileComponent";
 import RegisterComponent from "./components/UserComponents/RegisterComponent";
 import UserService from "./services/UserService"
 import TopMenu from "./components/UserComponents/TopMenu";
+import PublicProfile from "./components/UserComponents/PublicProfile";
+
 class Main extends React.Component {
 
     constructor(props) {
@@ -34,7 +36,7 @@ class Main extends React.Component {
                         <Route path='/register'
                                render={() => <RegisterComponent state={this.store}/>}/>
                         <Route path="/search/term/:term/location/:location"
-                               render={() => <RestaurantResultsContainer  state={this.store}/>}
+                               render={() => <RestaurantResultsContainer state={this.store}/>}
                         />
                         <Route path="/search/term/:term/location/"
                                render={() => <RestaurantResultsContainer state={this.store}/>}
@@ -48,8 +50,10 @@ class Main extends React.Component {
                         <Route path='/result/:id'
                                render={() => <RestaurantDetailContainer state={this.store}/>}/>
                         <Route path='/'
-                               render={() => <TopMenu state={this.store}/> }/>
-                        {/*render={() => <RestaurantDetailContainer state={this.store}/>}*/}
+                               render={() => <TopMenu state={this.store}/>}/>
+                        <Route path='/profile/:userId'
+                               render={props => <PublicProfile {...props}/>}/>
+                            {/*render={() => <RestaurantDetailContainer state={this.store}/>}*/}
                     </Switch>
                 </Router>
             </Provider>

@@ -42,9 +42,12 @@ export default class UserIcon extends React.Component {
                 >Profile</Link>
                 <Link className="btn btn-warning float-lg-right" to='/'
                       onClick={() => this.user_service.logout().then(
-                          res => console.log(res)
+                          res =>
+                          {
+                              console.log(res);
+                              this.props.handlers.loginProcess();
+                          }
                       )}
-                    // onClick={()=>this.props.handlers.loginProcess()}
                 >Log out</Link>
             </div>
             }

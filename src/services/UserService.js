@@ -18,13 +18,7 @@ export default class UserService {
     try_register = (state) => fetch(`${this.endpoint}/user`, {
         method: 'post',
         credentials: 'include',
-        body: JSON.stringify({
-            username: state.username,
-            password: state.password,
-            phone: state.phone,
-            zip: state.zip,
-            userType: state.role
-        }),
+        body: JSON.stringify(state),
         headers: {
             'content-type': 'application/json'
         }
@@ -48,4 +42,29 @@ export default class UserService {
             'content-type': 'application/json'
         }
     }).then(response => response.json())
+
+    profile_current_user = () => fetch(`${this.endpoint}/profile`, {
+        method: "get",
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    }).then(response => response.json())
+
+    profile_update_user = (user, uId) => fetch(`${this.endpoint}/user/${uId}`, {
+        method: "put",
+        credentials: 'include',
+        body: JSON.stringify(user),
+        headers: {
+            'content-type': 'application/json'
+        }
+    }).then(response => response.json());
+
+    profile_public_user = (userId) => fetch(`${this.endpoint}/user/${userId}`, {
+            method: "get",
+            credentials: 'include',
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(response=>response.json());
 }

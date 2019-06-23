@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom';
 import {Link} from "react-router-dom";
 import UserService from "../../services/UserService";
-import Redirect from "react-router-dom/es/Redirect";
+// import Redirect from "react-router-dom/es/Redirect";
 
  class LoginComponent extends React.Component {
     constructor(props){

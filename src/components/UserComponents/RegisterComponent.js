@@ -1,7 +1,7 @@
 import React from 'react'
 import {Router, Route,Link} from "react-router-dom";
 import UserService from "../../services/UserService";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 
 class RegisterComponent extends React.Component {
@@ -15,7 +15,7 @@ class RegisterComponent extends React.Component {
             zip:"",
             password:"",
             verify_password:"",
-            role:"Customer"
+            userType:"Customer"
         }
 
     }
@@ -118,8 +118,8 @@ class RegisterComponent extends React.Component {
                         </label>
                         <div className="col-sm-10">
                             <select id="role"
-                                    className="form-control" value={this.state.role}
-                                    onChange={event =>this.setState({role:event.target.value})}
+                                    className="form-control" value={this.state.userType}
+                                    onChange={event =>this.setState({userType:event.target.value})}
                             >
                                 <option value="Customer" title="if you are just a customer, choose this">
                                     customer --if you are just a customer
@@ -180,8 +180,10 @@ class RegisterComponent extends React.Component {
           }
           if(typeof res.message!=="undefined"&&res.message==="Login success"){
               this.props.history.push("/");
+          }else if(typeof res.message!=="undefined"){
+              alert(res.message);
           }else{
-              alert("Login failed!");
+              alert("ERROR! UNKNOWN REASON.");
           }
       });
     }
